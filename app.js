@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Register route
-app.use('/scrape', scraperRoutes);
+app.use('/', scraperRoutes);
 
 // Base
 app.get('/', (req, res) => {
@@ -30,3 +30,5 @@ const PORT = process.env.PORT || 5555;
 app.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);
 });
+
+export default app;

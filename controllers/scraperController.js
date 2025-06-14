@@ -22,3 +22,5 @@ export const handleScrape = async (req, res) => {
         res.status(500).json({ error: err.toString() })
     }
 }
+
+export default handleScrape
