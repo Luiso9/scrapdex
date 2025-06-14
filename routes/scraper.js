@@ -1,7 +1,7 @@
 import express from 'express'
 import handleScrape from '../controllers/scraperController.js'
-const router = express.Router();
+const router = express.Router()
 
-router.get('/:category', handleScrape);
+router.get('/:category', handleScrape)
 
-export default router;
+export default router

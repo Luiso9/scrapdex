@@ -1,27 +1,13 @@
-import { agentNewPage, agentClose } from '../../utils/browser.js';
+import {agentNewPage, agentClose} from '../../utils/browser.js'
 
-export async function getPopularMostFollow() {
-    const popularPage = await agentNewPage();
-    await popularPage.goto("https://mangadex.org/titles?page=1&translatedLang=en&onlyAvailableChapters=false&order=followedCount.desc", {waitUntil: 'load'});
+export const getPopular = async (page = 1, order = `followedCount.desc`) => {
+    const popularPage = await agentNewPage()
+    await popularPage.goto(`https://mangadex.org/titles?page=${page}&translatedLang=en&onlyAvailableChapters=false&order=${order}`, {waitUntil: 'load'})
 
-    await popularPage.waitForSelector('.manga-card');
+    await popularPage.waitForSelector('.manga-card')
     const title = await popularPage.$$eval('.manga-card .title span', els =>
         els.map(el => el.textContent.trim())
-    );
-
-    await agentClose();
-    return title;
-}
-
-export async function getPopularByRating() {
-    const popularPage = await agentNewPage();
-    await popularPage.goto("https://mangadex.org/titles?page=1&translatedLang=en&onlyAvailableChapters=false&order=rating.desc", {waitUntil: 'load'});
-
-    await popularPage.waitForSelector('.manga-card');
-    const title = await popularPage.$$eval('.manga-card .title span', els =>
-        els.map(el => el.textContent.trim())
-    );
-
-    await agentClose();
-    return title;
+    )
+    await agentClose()
+    return title
 }
